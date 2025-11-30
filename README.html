@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Renew</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+        }
+        .pixel-font {
+            font-family: 'VT323', monospace;
+        }
+        .minecraft-btn {
+            image-rendering: pixelated;
+            box-shadow: inset -4px -4px 0px 0px rgba(0,0,0,0.5), inset 4px 4px 0px 0px rgba(255,255,255,0.2);
+        }
+        .minecraft-btn:active {
+            box-shadow: inset 4px 4px 0px 0px rgba(0,0,0,0.5);
+            transform: translateY(2px);
+        }
+        .minecraft-input {
+            box-shadow: inset 2px 2px 0px 0px #000000;
+            border: 2px solid #555;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-md bg-stone-800 border-4 border-black shadow-2xl relative">
+        <!-- Decoration Borders (Minecraft Style) -->
+        <div class="absolute -top-1 -left-1 w-2 h-2 bg-stone-600"></div>
+        <div class="absolute -top-1 -right-1 w-2 h-2 bg-stone-600"></div>
+        <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-stone-600"></div>
+        <div class="absolute -bottom-1 -right-1 w-2 h-2 bg-stone-600"></div>
+
+        <!-- Header -->
+        <div class="bg-stone-900 p-6 text-center border-b-4 border-black">
+            <h1 class="text-4xl text-yellow-400 pixel-font tracking-wide drop-shadow-md">SERVER RENEWAL</h1>
+            <p class="text-stone-400 text-sm mt-1 pixel-font text-lg">EXTEND YOUR RANK & PERKS</p>
+        </div>
+
+        <!-- Content -->
+        <div class="p-8 space-y-6">
+            
+            <form id="renewForm" onsubmit="handleRenew(event)">
+                <!-- Username Input -->
+                <div class="mb-5">
+                    <label class="block text-stone-300 pixel-font text-xl mb-2">MINECRAFT USERNAME</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-cube text-stone-500"></i>
+                        </div>
+                        <input type="text" required 
+                            class="minecraft-input w-full bg-stone-900 text-white pl-10 pr-4 py-3 pixel-font text-xl outline-none focus:border-green-500 transition-colors placeholder-stone-600" 
+                            placeholder="Steve">
+                    </div>
+                </div>
+
+                <!-- Plan Selection -->
+                <div class="mb-8">
+                    <label class="block text-stone-300 pixel-font text-xl mb-2">SELECT DURATION</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="plan" value="1" class="peer sr-only" checked>
+                            <div class="bg-stone-700 border-2 border-stone-900 p-3 text-center hover:bg-stone-600 peer-checked:bg-green-900 peer-checked:border-green-500 transition-all">
+                                <div class="pixel-font text-2xl text-white">1 MONTH</div>
+                                <div class="pixel-font text-green-400">$9.99</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="plan" value="3" class="peer sr-only">
+                            <div class="bg-stone-700 border-2 border-stone-900 p-3 text-center hover:bg-stone-600 peer-checked:bg-green-900 peer-checked:border-green-500 transition-all">
+                                <div class="pixel-font text-2xl text-white">3 MONTHS</div>
+                                <div class="pixel-font text-yellow-400">$24.99</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- The Renew Button -->
+                <button type="submit" id="renewBtn"
+                    class="minecraft-btn w-full bg-green-600 hover:bg-green-500 text-white text-3xl pixel-font py-4 border-black border-2 transition-transform">
+                    RENEW NOW
+                </button>
+            </form>
+
+            <!-- Success Message (Hidden by default) -->
+            <div id="successMsg" class="hidden text-center bg-green-900/50 border-2 border-green-500 p-4">
+                <p class="pixel-font text-green-300 text-xl">REQUEST SUBMITTED!</p>
+                <p class="pixel-font text-white text-lg">Redirecting to payment gateway...</p>
+            </div>
+
+        </div>
+        
+        <!-- Minimal Footer -->
+        <div class="bg-stone-900 p-3 text-center border-t-4 border-black">
+            <p class="text-stone-500 pixel-font text-lg">SECURE PAYMENT • INSTANT ACTIVATION</p>
+        </div>
+    </div>
+
+    <script>
+        function handleRenew(e) {
+            e.preventDefault();
+            const btn = document.getElementById('renewBtn');
+            const form = document.getElementById('renewForm');
+            const msg = document.getElementById('successMsg');
+
+            // Button Loading State
+            btn.innerHTML = "PROCESSING...";
+            btn.classList.add('bg-stone-600', 'cursor-not-allowed');
+            btn.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                form.style.display = 'none';
+                msg.classList.remove('hidden');
+                
+                // Reset after delay (for demo purposes)
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
